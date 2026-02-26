@@ -42,24 +42,21 @@ export function ContractorDashboard({ user, accessToken, onLogout }: ContractorD
     fetchPosts();
   }, []);
 
- //
-const fetchProjects = async () => {
-  // ... similar try/catch structure as above ...
-  const dummyProjects: Project[] = [
-    {
-      id: 'c1',
-      title: 'Mobile App Development',
-      description: 'Looking for a Flutter expert to build a delivery app.',
-      budget: '$5000',
-      deadline: '2025-01-15',
-      skills: ['Flutter', 'Firebase'],
-      status: 'open',
-      employerName: 'TechCorp',
-      createdAt: new Date().toISOString()
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/projects`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setProjects(data.projects);
+      }
+    } catch (error) {
+      console.error('Error fetching projects:', error);
     }
-  ];
-  // Logic to setProjects with data or dummyProjects
-};
+  };
 
   const fetchPosts = async () => {
     try {

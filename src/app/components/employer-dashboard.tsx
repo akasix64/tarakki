@@ -57,47 +57,37 @@ export function EmployerDashboard({ user, accessToken, onLogout }: EmployerDashb
     fetchPosts();
   }, []);
 
-  //
-const fetchProjects = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/projects`, {
-      headers: { 'Authorization': `Bearer ${accessToken}` }
-    });
-    const data = await response.json();
-    // Merge API data with dummy projects
-    const dummyProjects: Project[] = [
-      {
-        id: 'd1',
-        title: 'React Website Redesign',
-        description: 'Modernize our corporate landing page using Tailwind CSS.',
-        budget: '$2000',
-        deadline: '2024-12-01',
-        skills: ['React', 'Tailwind', 'TypeScript'],
-        status: 'open',
-        createdAt: new Date().toISOString()
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/projects`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setProjects(data.projects);
       }
-    ];
-    setProjects(response.ok ? [...data.projects, ...dummyProjects] : dummyProjects);
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-    setProjects([{ id: 'd1', title: 'Sample Project', description: 'Offline preview', skills: ['Demo'], status: 'open', createdAt: new Date().toISOString() }]);
-  }
-};
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    }
+  };
 
-const fetchPosts = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/posts`, {
-      headers: { 'Authorization': `Bearer ${accessToken}` }
-    });
-    const data = await response.json();
-    const dummyPosts: Post[] = [
-      { id: 'p1', content: 'Excited to announce we are hiring new developers!', authorName: 'HR Team', createdAt: new Date().toISOString() }
-    ];
-    setPosts(response.ok ? [...data.posts, ...dummyPosts] : dummyPosts);
-  } catch (error) {
-    setPosts([{ id: 'p1', content: 'Check back later for updates!', authorName: 'System', createdAt: new Date().toISOString() }]);
-  }
-};
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/posts`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setPosts(data.posts);
+      }
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
 
   const handleCreateProject = async (e: React.FormEvent) => {
     e.preventDefault();

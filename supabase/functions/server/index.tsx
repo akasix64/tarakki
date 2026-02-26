@@ -29,8 +29,8 @@ app.get("/make-server-d6e2fa79/health", (c) => {
 // Initialize Supabase client
 const getSupabaseAdmin = () => {
   return createClient(
-    Deno.env.get('https://supabase.com/dashboard/project/nsbrcfzlbchzwwdsmezr')!,
-    Deno.env.get('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zYnJjZnpsYmNoend3ZHNtZXpyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNDEyMywiZXhwIjoyMDg3NTgwMTIzfQ.hNPBWlL6TqIVT5OfCLSMXUGutYZ7KO6MsWAe6U9-n4w')!,
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
   );
 };
 
