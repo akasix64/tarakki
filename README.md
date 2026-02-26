@@ -1,10 +1,8 @@
+# Job Portal Prototype
 
-  # Job Portal Prototype
+## Running the code
 
+Run `npm i` to install the dependencies.
 
-  ## Running the code
-
-  Run `npm i` to install the dependencies.
-
-  Run `npm run dev` to start the development server.
-  "# tarakki" 
+Run `npm run dev` to start the development server.
+"# tarakki"
